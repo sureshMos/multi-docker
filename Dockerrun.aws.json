@@ -1,0 +1,38 @@
+{
+    "AWSEBDockerrunVersion": 2,
+    "containerDefinitions": [
+        {
+            "name": "client",
+            "image": "suresh2331/multi-client",
+            "hostName": "client",
+            "essential": false
+        },
+        {
+            "name": "server",
+            "image": "suresh2331/multi-server",
+            "hostName": "api",
+            "essential": false
+        },
+        {
+            "name": "worker",
+            "image": "suresh2331/multi-worker",
+            "hostName": "worker",
+            "essential": false
+        },
+        {
+            "name": "nginx",
+            "image": "suresh2331/multi-nginx",
+            "hostName": "nginx",
+            "essential": true,
+            "portMappings": [
+                {
+                    "hostPort": 80,
+                    "containerPort": 80
+                }
+            ],
+            "links": [
+                "client", "server"
+            ]
+        }
+    ]
+}
